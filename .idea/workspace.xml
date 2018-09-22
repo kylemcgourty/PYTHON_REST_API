@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="72e035c2-0894-4fdc-9fec-7af5d22077e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/DFS.db" beforeDir="false" afterPath="$PROJECT_DIR$/DFS.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,7 +12,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/DFS_API$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1537647229892" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
+    <SUITE FILE_PATH="coverage/DFS_API$Flask__app_py_.coverage" NAME="Flask (app.py) Coverage Results" MODIFIED="1537651641775" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
   </component>
   <component name="FUSProjectUsageTrigger">
     <session id="789224812">
@@ -23,12 +24,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1468" />
+          <entry key="py" value="2508" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1461" />
+          <entry key="Python" value="2501" />
           <entry key="SQL" value="7" />
         </counts>
       </usages-collector>
@@ -43,13 +44,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="75" column="29" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+            <state relative-caret-position="396">
+              <caret line="83" column="31" lean-forward="true" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
-                <marker date="1537646067363" expanded="true" signature="841:994" ph="..." />
-                <marker date="1537646067363" expanded="true" signature="1841:1858" ph="..." />
-                <marker date="1537646067363" expanded="true" signature="1841:2100" ph="..." />
+                <marker date="1537651436571" expanded="true" signature="706:1129" ph="..." />
+                <marker date="1537651436571" expanded="true" signature="1045:1051" ph="..." />
+                <marker date="1537651436571" expanded="true" signature="2179:2196" ph="..." />
+                <marker date="1537651436571" expanded="true" signature="3995:4150" ph="..." />
               </folding>
             </state>
           </provider>
@@ -200,13 +202,14 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="75" column="29" selection-start-line="75" selection-start-column="29" selection-end-line="75" selection-end-column="29" />
+        <state relative-caret-position="396">
+          <caret line="83" column="31" lean-forward="true" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
-            <marker date="1537646067363" expanded="true" signature="841:994" ph="..." />
-            <marker date="1537646067363" expanded="true" signature="1841:1858" ph="..." />
-            <marker date="1537646067363" expanded="true" signature="1841:2100" ph="..." />
+            <marker date="1537651436571" expanded="true" signature="706:1129" ph="..." />
+            <marker date="1537651436571" expanded="true" signature="1045:1051" ph="..." />
+            <marker date="1537651436571" expanded="true" signature="2179:2196" ph="..." />
+            <marker date="1537651436571" expanded="true" signature="3995:4150" ph="..." />
           </folding>
         </state>
       </provider>

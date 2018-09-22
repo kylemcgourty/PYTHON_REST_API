@@ -2,61 +2,60 @@ from flask import Flask
 from flask import request
 from flask import abort, jsonify
 import sqlite3
-
+import uuid
 
 app = Flask(__name__)
 
 conn = sqlite3.connect("DFS.db")
-
-cursor = conn.cursor()
-
-dropTableStatement = "DROP TABLE LISTS"
-
-cursor.execute(dropTableStatement)
-
-dropTableStatement = "DROP TABLE TODOS"
-
-cursor.execute(dropTableStatement)
+#
+# cursor = conn.cursor()
+#
+# dropTableStatement = "DROP TABLE LISTS"
+#
+# cursor.execute(dropTableStatement)
+#
+# dropTableStatement = "DROP TABLE TODOS"
+#
+# cursor.execute(dropTableStatement)
 
 conn.execute('''CREATE TABLE IF NOT EXISTS LISTS 
-(ID INT PRIMARY KEY NOT NULL,
+(ID TEXT PRIMARY KEY NOT NULL,
 NAME TEXT NOT NULL,
 DESCRIPTION TEXT NOT NULL);
 ''')
 
 conn.execute('''
-CREATE TABLE IF NOT EXISTS TODOS
-(ID INT PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS TASKS
+(ID TEXT PRIMARY KEY NOT NULL,
 NAME TEXT NOT NULL,
 COMPLETED INT NOT NULL,
 LISTID INT NOT NULL,
 FOREIGN KEY(LISTID) REFERENCES LISTS(ID));
 ''')
 
-print("Table created succesfuly")
 
-# conn.execute("INSERT INTO KYLE(ID, NAME) VALUES (11, 'DR. REDWOOD')");
-#
-# conn.commit()
-
-print("Record successfully inserted")
+# class Lists:
+#     def __init__(self):
+#         self.ListID = 0
+#         self.taskIDs = {}
+#     def create_id(self):
+#         self.ListID += 1
+#         self.taskIDs[str(self.ListID)] = 0
+#         return self.ListID
+#     def create_task_id(self, list_id):
+#         self.taskIDs[list_id] += 1
+#         return self.taskIDs[list_id]
 
 class Lists:
-    def __init__(self):
-        self.ListID = 0
+
     def create_id(self):
-        self.ListID += 1
-        return self.ListID
+        return uuid.uuid4()
+
+
 
 ListManagement = Lists()
 
-# @app.route('/')
-# def hello_world():
-#     conn = sqlite3.connect("DFS.db")
-#     cursor = conn.execute("SELECT ID, NAME FROM KYLE WHERE ID = 11")
-#     for individual in cursor:
-#         string = "KYLES STATS:\n" + str(individual[0]) + "\n" + individual[1]
-#     return string
+
 
 @app.route('/lists', methods=['POST'])
 def create_list():
@@ -66,12 +65,24 @@ def create_list():
     list = {
         'name': request.json['name'],
         'description': request.json['description'],
-        'id': ListManagement.create_id()
+        'id': ListManagement.create_id(),
+        "tasks": request.json["tasks"]
     }
     conn = sqlite3.connect("DFS.db")
     c = conn.cursor()
+
+    """insert new list"""
+
+    print('value to be inserted', list['id'], list['name'], list['description'])
     conn.execute("INSERT INTO LISTS(ID, NAME, DESCRIPTION) VALUES (?, ?, ?)",
-                 (list['id'], list['name'], list['description']));
+                 (str(list['id']), list['name'], list['description']));
+
+    for task in list["tasks"]:
+        task["id"] = ListManagement.create_id()
+        task["list_id"] = list["id"]
+
+    """insert multiple tasks"""
+    conn.executemany('INSERT INTO TASKS(ID, NAME, COMPLETED, LISTID) VALUES (?, ?, ?, ?)', [(task['id'], task['name'], task['completed'], task['list_id']) for task in list["tasks"]]);
     conn.commit()
     return jsonify(list), 201
 
@@ -85,11 +96,58 @@ def return_list():
     conn = sqlite3.connect("DFS.db")
     cursor = conn.execute("SELECT * FROM LISTS")
     for list in cursor:
-        list_organizer = {"id": list[0], "name":list[1], "description": list[2]}
+        list_organizer = {"id": list[0], "name":list[1], "description": list[2], "tasks": list()}
         lists.append(list_organizer)
+
+    cursor = conn.execute("SELECT * FROM TASKS")
+    for task in cursor:
+        task_organizer = {"id" : task[0], "name": task[1], "completed": task[2]}
+        list[task[3]]["tasks"].append(task_organizer)
     return jsonify(lists)
 
 
+@app.route('/list/<int:list_id>', methods=['GET'])
+def get_single_list(list_id):
+    lists = []
+    conn = sqlite3.connect("DFS.db")
+    cursor = conn.execute("SELECT * FROM LISTS WHERE ID = ?", list_id)
+    for list in cursor:
+        list_organizer = {"id": list[0], "name": list[1], "description": list[2], "tasks": list()}
+        lists.append(list_organizer)
+
+    cursor = conn.execute("SELECT * FROM TASKS WHERE LISTID = ?", list_id)
+    for task in cursor:
+        task_organizer = {"id": task[0], "name": task[1], "completed": task[2]}
+        lists[0]["tasks"].append(task_organizer)
+    return jsonify(lists)
+
+
+@app.route('/list/<int:list_id>/task', methods=['POST'])
+def add_task(list_id):
+
+    if not request.json:
+        abort(400)
+    task = {
+        'name': request.json['name'],
+        'completed': request.json['completed'],
+        'id': ListManagement.create_id(),
+        "list_id": list_id
+    }
+    conn = sqlite3.connect("DFS.db")
+    c = conn.cursor()
+    conn.execute("INSERT INTO TASKS(ID, NAME, COMPLETED, LISTID) VALUES (?, ?, ?, ?)",
+                 (task['id'], task['name'], task['completed'], task['list_id']));
+    conn.commit()
+    return jsonify(task), 201
+
+
+@app.route('/list/<int:list_id>/task/<int:task_id>/complete', methods=['POST'])
+def set_to_complete(list_id, task_id):
+
+    conn = sqlite3.connect("DFS.db")
+    c = conn.cursor()
+    conn.execute("UPDATE TASKS SET COMPLETED = ? WHERE ID = ?", (1, task_id));
+    return 200
 
 if __name__ == '__main__':
     app.run()
