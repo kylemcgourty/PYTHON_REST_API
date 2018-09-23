@@ -2,21 +2,12 @@ from flask import Flask
 from flask import request
 from flask import abort, jsonify
 import sqlite3
-import uuid
+
 
 app = Flask(__name__)
 
 conn = sqlite3.connect("DFS.db")
 
-cursor = conn.cursor()
-
-dropTableStatement = "DROP TABLE LISTS"
-
-cursor.execute(dropTableStatement)
-
-dropTableStatement = "DROP TABLE TASKS"
-
-cursor.execute(dropTableStatement)
 
 conn.execute('''CREATE TABLE IF NOT EXISTS LISTS 
 (ID INT PRIMARY KEY NOT NULL,
@@ -35,6 +26,8 @@ FOREIGN KEY(LISTID) REFERENCES LISTS(ID));
 ''')
 
 
+
+"""ID generator. Requires the server to maintain some state. In a scaled version, it would be replaced with UUIDs"""
 class Lists:
     def __init__(self):
         self.ListID = 0
@@ -48,10 +41,6 @@ class Lists:
         self.taskIDs[list_id] += 1
         return self.taskIDs[list_id]
 
-# class Lists:
-#
-#     def create_id(self):
-#         return uuid.uuid4()
 
 
 
@@ -73,9 +62,6 @@ def create_list():
     conn = sqlite3.connect("DFS.db")
     c = conn.cursor()
 
-    """insert new list"""
-
-    print('value to be inserted', list['id'], list['name'], list['description'])
     conn.execute("INSERT INTO LISTS(ID, NAME, DESCRIPTION) VALUES (?, ?, ?)",
                  (str(list['id']), list['name'], list['description']));
 
@@ -83,7 +69,6 @@ def create_list():
         task["id"] = ListManagement.create_task_id(list['id'])
         task["list_id"] = list["id"]
 
-    """insert multiple tasks"""
     conn.executemany('INSERT INTO TASKS(ID, NAME, COMPLETED, LISTID) VALUES (?, ?, ?, ?)', [(task['id'], task['name'], task['completed'], task['list_id']) for task in list["tasks"]]);
     conn.commit()
     return jsonify(list), 201
