@@ -96,14 +96,14 @@ def return_list():
     lists = []
     conn = sqlite3.connect("DFS.db")
     cursor = conn.execute("SELECT * FROM LISTS")
-    for list in cursor:
-        list_organizer = {"id": list[0], "name":list[1], "description": list[2], "tasks": list()}
-        lists.append(list_organizer)
+    for main_list in cursor:
+        main_list_organizer = {"id": main_list[0], "name": main_list[1], "description": main_list[2], "tasks":  list()}
+        lists.append(main_list_organizer)
 
     cursor = conn.execute("SELECT * FROM TASKS")
     for task in cursor:
-        task_organizer = {"id" : task[0], "name": task[1], "completed": task[2]}
-        list[task[3]]["tasks"].append(task_organizer)
+        task_organizer = {"id": task[0], "name": task[1], "completed": task[2]}
+        lists[task[3]-1]["tasks"].append(task_organizer)
     return jsonify(lists)
 
 
