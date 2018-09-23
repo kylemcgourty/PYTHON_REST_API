@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72e035c2-0894-4fdc-9fec-7af5d22077e4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/DFS.db" beforeDir="false" afterPath="$PROJECT_DIR$/DFS.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-    </list>
+    <list default="true" id="72e035c2-0894-4fdc-9fec-7af5d22077e4" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,18 +21,26 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="2508" />
+          <entry key="py" value="2513" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="2501" />
+          <entry key="Python" value="2506" />
           <entry key="SQL" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts" />
-      <usages-collector id="statistics.file.types.open" />
-      <usages-collector id="statistics.file.extensions.open" />
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="1" />
+        </counts>
+      </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
     </session>
   </component>
@@ -44,14 +49,14 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="83" column="31" lean-forward="true" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
+            <state relative-caret-position="519">
+              <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
-                <marker date="1537651436571" expanded="true" signature="706:1129" ph="..." />
-                <marker date="1537651436571" expanded="true" signature="1045:1051" ph="..." />
-                <marker date="1537651436571" expanded="true" signature="2179:2196" ph="..." />
-                <marker date="1537651436571" expanded="true" signature="3995:4150" ph="..." />
+                <marker date="1537651641765" expanded="true" signature="706:1129" ph="..." />
+                <marker date="1537651641765" expanded="true" signature="1045:1051" ph="..." />
+                <marker date="1537651641765" expanded="true" signature="2184:2201" ph="..." />
+                <marker date="1537651641765" expanded="true" signature="4000:4155" ph="..." />
               </folding>
             </state>
           </provider>
@@ -177,11 +182,11 @@
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" weight="0.32959184" />
-      <window_info anchor="bottom" id="Terminal" weight="0.27959183" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.27959183" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32857144" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32857144" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -200,16 +205,23 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="1814" selection-start-line="1814" selection-end-line="1814" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="83" column="31" lean-forward="true" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
+        <state relative-caret-position="519">
+          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
-            <marker date="1537651436571" expanded="true" signature="706:1129" ph="..." />
-            <marker date="1537651436571" expanded="true" signature="1045:1051" ph="..." />
-            <marker date="1537651436571" expanded="true" signature="2179:2196" ph="..." />
-            <marker date="1537651436571" expanded="true" signature="3995:4150" ph="..." />
+            <marker date="1537651641765" expanded="true" signature="706:1129" ph="..." />
+            <marker date="1537651641765" expanded="true" signature="1045:1051" ph="..." />
+            <marker date="1537651641765" expanded="true" signature="2184:2201" ph="..." />
+            <marker date="1537651641765" expanded="true" signature="4000:4155" ph="..." />
           </folding>
         </state>
       </provider>

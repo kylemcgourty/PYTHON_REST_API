@@ -7,26 +7,26 @@ import uuid
 app = Flask(__name__)
 
 conn = sqlite3.connect("DFS.db")
-#
-# cursor = conn.cursor()
-#
-# dropTableStatement = "DROP TABLE LISTS"
-#
-# cursor.execute(dropTableStatement)
-#
-# dropTableStatement = "DROP TABLE TODOS"
-#
-# cursor.execute(dropTableStatement)
+
+cursor = conn.cursor()
+
+dropTableStatement = "DROP TABLE LISTS"
+
+cursor.execute(dropTableStatement)
+
+dropTableStatement = "DROP TABLE TASKS"
+
+cursor.execute(dropTableStatement)
 
 conn.execute('''CREATE TABLE IF NOT EXISTS LISTS 
-(ID TEXT PRIMARY KEY NOT NULL,
+(ID INT PRIMARY KEY NOT NULL,
 NAME TEXT NOT NULL,
 DESCRIPTION TEXT NOT NULL);
 ''')
 
 conn.execute('''
 CREATE TABLE IF NOT EXISTS TASKS
-(ID TEXT PRIMARY KEY NOT NULL,
+(ID INT PRIMARY KEY NOT NULL,
 NAME TEXT NOT NULL,
 COMPLETED INT NOT NULL,
 LISTID INT NOT NULL,
@@ -34,22 +34,23 @@ FOREIGN KEY(LISTID) REFERENCES LISTS(ID));
 ''')
 
 
-# class Lists:
-#     def __init__(self):
-#         self.ListID = 0
-#         self.taskIDs = {}
-#     def create_id(self):
-#         self.ListID += 1
-#         self.taskIDs[str(self.ListID)] = 0
-#         return self.ListID
-#     def create_task_id(self, list_id):
-#         self.taskIDs[list_id] += 1
-#         return self.taskIDs[list_id]
-
 class Lists:
-
+    def __init__(self):
+        self.ListID = 0
+        self.taskIDs = {}
     def create_id(self):
-        return uuid.uuid4()
+        self.ListID += 1
+        self.taskIDs[str(self.ListID)] = 0
+        return self.ListID
+    def create_task_id(self, list_id):
+        list_id = str(list_id)
+        self.taskIDs[list_id] += 1
+        return self.taskIDs[list_id]
+
+# class Lists:
+#
+#     def create_id(self):
+#         return uuid.uuid4()
 
 
 
@@ -78,7 +79,7 @@ def create_list():
                  (str(list['id']), list['name'], list['description']));
 
     for task in list["tasks"]:
-        task["id"] = ListManagement.create_id()
+        task["id"] = ListManagement.create_task_id(list['id'])
         task["list_id"] = list["id"]
 
     """insert multiple tasks"""
