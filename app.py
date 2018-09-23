@@ -131,7 +131,7 @@ def add_task(list_id):
     task = {
         'name': request.json['name'],
         'completed': request.json['completed'],
-        'id': ListManagement.create_id(),
+        'id': ListManagement.create_task_id(list_id),
         "list_id": list_id
     }
     conn = sqlite3.connect("DFS.db")
