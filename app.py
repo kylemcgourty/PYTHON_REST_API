@@ -111,12 +111,12 @@ def return_list():
 def get_single_list(list_id):
     lists = []
     conn = sqlite3.connect("DFS.db")
-    cursor = conn.execute("SELECT * FROM LISTS WHERE ID = ?", list_id)
-    for list in cursor:
-        list_organizer = {"id": list[0], "name": list[1], "description": list[2], "tasks": list()}
-        lists.append(list_organizer)
+    cursor = conn.execute("SELECT * FROM LISTS WHERE ID = ?", (list_id,))
+    for main_list in cursor:
+        main_list_organizer = {"id": main_list[0], "name": main_list[1], "description": main_list[2], "tasks": list()}
+        lists.append(main_list_organizer)
 
-    cursor = conn.execute("SELECT * FROM TASKS WHERE LISTID = ?", list_id)
+    cursor = conn.execute("SELECT * FROM TASKS WHERE LISTID = ?", (list_id,))
     for task in cursor:
         task_organizer = {"id": task[0], "name": task[1], "completed": task[2]}
         lists[0]["tasks"].append(task_organizer)
