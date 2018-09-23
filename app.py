@@ -147,8 +147,9 @@ def set_to_complete(list_id, task_id):
 
     conn = sqlite3.connect("DFS.db")
     c = conn.cursor()
-    conn.execute("UPDATE TASKS SET COMPLETED = ? WHERE ID = ?", (1, task_id));
-    return 200
+    conn.execute("UPDATE TASKS SET COMPLETED = ? WHERE ID = ? AND LISTID = ?", (1, task_id, list_id));
+    conn.commit()
+    return jsonify({"Status": "Completed"}), 200
 
 if __name__ == '__main__':
     app.run()
